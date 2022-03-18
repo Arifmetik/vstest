@@ -1,6 +1,16 @@
-#TG:ChauhanMahesh/DroneBots
-#Github.com/Vasusen-code
-
+#  This file is part of the VIDEOconvertor distribution.
+#  Copyright (c) 2021 vasusen-code ; All rights reserved. 
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, version 3.
+#
+#  This program is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  General Public License for more details.
+#
+#  License can be found in < https://github.com/vasusen-code/VIDEOconvertor/blob/public/LICENSE> .
 
 import time
 import os
@@ -16,7 +26,7 @@ from telethon.tl.types import DocumentAttributeVideo
 
 async def trim(event, msg, st, et):
     Drone = event.client
-    edit = await Drone.send_message(event.chat_id, "Process boshlandi", reply_to=msg.id)
+    edit = await Drone.send_message(event.chat_id, "Trying to process.", reply_to=msg.id)
     new_name = "out_" + dt.now().isoformat("_", "seconds")
     if hasattr(msg.media, "document"):
         file = msg.media.document
@@ -41,10 +51,10 @@ async def trim(event, msg, st, et):
         out = new_name + ext
     DT = time.time()
     try:
-        await fast_download(name, file, Drone, edit, DT, "**Yuklanmoqda:**")
+        await fast_download(name, file, Drone, edit, DT, "**DOWNLOADING:**")
     except Exception as e:
         print(e)
-        return await edit.edit(f"Yuklashda xatolik!\n\nMurojat [ADMIN]({SUPPORT_LINK})", link_preview=False) 
+        return await edit.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False) 
     try:
         await edit.edit("Trimming.")
         bash(f'ffmpeg -i {name} -ss {st} -to {et} -acodec copy -vcodec copy {out}')
@@ -52,28 +62,24 @@ async def trim(event, msg, st, et):
         rename(out, out2)
     except Exception as e:
         print(e)
-        return await edit.edit(f"Kesishda xatolik!\n\nMurojat [ADMIN]({SUPPORT_LINK})", link_preview=False)
+        return await edit.edit(f"An error occured while trimming!\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
     UT = time.time()
-    text = f"**Kesildi :** @{BOT_UN}"
+    text = f"**TRIMMED by :** @{BOT_UN}"
     try:
         metadata = video_metadata(out2)
         width = metadata["width"]
         height = metadata["height"]
         duration = metadata["duration"]
         attributes = [DocumentAttributeVideo(duration=duration, w=width, h=height, supports_streaming=True)]
-        uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**Yuborilmoqda:**')
+        uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**UPLOADING:**')
         await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG3, attributes=attributes, force_document=False)
     except Exception:
         try:
-            uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**Yuborilmoqda:**')
+            uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**UPLOADING:**')
             await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG, force_document=True)
         except Exception as e:
             print(e)
-            return await edit.edit(f"Yuborishda xatolik!\n\nMurojat [ADMIN]({SUPPORT_LINK})", link_preview=False)
+            return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
     await edit.delete()
     os.remove(name)
     os.remove(out2)
-      
-      
-      
-      
