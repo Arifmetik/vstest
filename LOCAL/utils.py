@@ -1,11 +1,18 @@
-#TG:ChauhanMahesh/DroneBots
-#Github.com/vasusen-code
+#  This file is part of the VIDEOconvertor distribution.
+#  Copyright (c) 2021 vasusen-code ; All rights reserved. 
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, version 3.
+#
+#  This program is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  General Public License for more details.
+#
+#  License can be found in < https://github.com/vasusen-code/VIDEOconvertor/blob/public/LICENSE> .
 
-import time
-import math
-import re
-import asyncio
-import subprocess
+import time, math, re, asyncio, subprocess
 from ethon.pyfunc import total_frames as tf
 from telethon import events
 
@@ -33,12 +40,12 @@ def humanbytes(size):
     if size in [None, ""]:
         return "0 B"
     for unit in ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]:
-        if size < 1000:
+        if size < 1024:
             break
-        size /= 1000
+        size /= 1024
     return f"{size:.2f} {unit}"
    
-async def ffmpeg_progress(cmd, file, progress, now, event, ps_name):
+async def ffmpeg_progress(cmd, file, progress, now, event, ps_name, log=None):
     total_frames = tf(file)
     with open(progress, "w") as fk:
         pass
@@ -66,5 +73,6 @@ async def ffmpeg_progress(cmd, file, progress, now, event, ps_name):
                 )
                 e_size = humanbytes(size) + " of ~" + humanbytes((size / per) * 100)
                 eta = time_formatter(some_eta)
-                await event.edit(f'{ps_name}\n\n{progress_str}' + f'Monitor: {e_size}\n\nTaxminan: {eta} da boʻladi')
-                            
+                await event.edit(f'{ps_name}\n\n{progress_str}' + f'GROSS: {e_size}\n\nETA: {eta}')
+                if log != None:
+                    await log.edit(f'{ps_name}\n\n{progress_str}' + f'GROSS: {e_size}\n\nETA: {eta}')
