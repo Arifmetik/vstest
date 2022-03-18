@@ -13,8 +13,6 @@ info_text = "Bot admini @lfraganus\n"
 
 help_text = "Menga video yuboring. Men uni o'zgartiraman\n\ncompress - videoni siqish\nconvert - audio yoki video formatini o‘zgartirish\nrename - faylni qayta nomlash\ntrim - videoni kesish" 
 
-`Encode` - encode your video into different lib format or resolution
-
 `HEVC compress` - negligible loss compression
 
 `FAST compress` - Very fast and Efficient compression
