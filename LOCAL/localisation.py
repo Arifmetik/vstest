@@ -15,17 +15,17 @@ help_text = "Menga video yuboring. Men uni o'zgartiraman\n\ncompress - videoni s
 
 `Encode` - encode your video into different lib format or resolution
 
-•`HEVC compress` - negligible loss compression
+`HEVC compress` - negligible loss compression
 
-•`FAST compress` - Very fast and Efficient compression
+`FAST compress` - Very fast and Efficient compression
 
-•`Convert` - change formats or extract audio of any video
+`Convert` - change formats or extract audio of any video
 
-•`Rename` - rename any file, extension not required
+`Rename` - rename any file, extension not required
 
-•`SSHOTS` - generate 10 screenshots of your video
+`SSHOTS` - generate 10 screenshots of your video
 
-•`Trim` - cut your videos"""
+`Trim` - cut your videos"""
 
 source_text = "Diqqatingiz uchun rahmat😁"
 
